@@ -3,6 +3,8 @@ const path = require('path');
 const acorn = require('acorn');
 const walk = require('acorn-walk');
 
+const convertESModulesToCommonJS = require('./covertESModulesToCommonJS');
+
 class Module {
   #absolutePath = null;
   #ast = null;
@@ -10,7 +12,10 @@ class Module {
   constructor(absolutePath) {
     this.#absolutePath = absolutePath;
     this.id = absolutePath;
-    this.content = fs.readFileSync(absolutePath, { encoding: 'utf-8' });
+
+    const rawContent = fs.readFileSync(absolutePath, { encoding: 'utf-8' });
+    this.content = convertESModulesToCommonJS(rawContent);
+
     this.#ast = acorn.parse(this.content, { ecmaVersion: 'latest' });
     this.dependencies = this.#findDependencies();
   }
