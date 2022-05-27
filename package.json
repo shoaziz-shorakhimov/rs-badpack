@@ -1,0 +1,14 @@
+{
+  "name": "badpack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "acorn": "^8.7.1",
+    "acorn-walk": "^8.2.0",
+    "lodash": "^4.17.21"
+  }
+}
